@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon | Merkebet</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .left, .right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .left {
+      background-color: #3d521f;
+      flex-direction: column;
+      color: #e4e3df;
+      padding: 2rem;
+    }
+
+    .right {
+      background-color: #e4e3df;
+      color: #3d521f;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+    }
+
+    p {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      max-width: 400px;
+      line-height: 1.5;
+    }
+
+    .contact {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <h1>Coming Soon</h1>
+      <p>My portfolio website is under construction. Stay tuned for something creative and inspiring!</p>
+    </div>
+    <div class="right">
+      <h2>Merkebet Temere</h2>
+      <div class="contact">
+        <p><strong>Email:</strong> merkebet@example.com</p>
+        <p><strong>LinkedIn:</strong> linkedin.com/in/merkebet</p>
+        <p><strong>GitHub:</strong> github.com/merkebet</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
