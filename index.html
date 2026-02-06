@@ -1,97 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon | Merkebet Temere</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Latest Properties - Temer Properties</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
 
-  <!-- Font Awesome for icons -->
-  <script src="https://kit.fontawesome.com/a2e0e6c5b1.js" crossorigin="anonymous"></script>
+        .latest-properties-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
 
-    body, html {
-      height: 100%;
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
-    }
+        .section-subtitle {
+            color: #0066cc;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
 
-    .container {
-      display: flex;
-      height: 100vh;
-      animation: fadeIn 1.5s ease-in-out;
-    }
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+        }
 
-    .left, .right {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      flex-direction: column;
-      padding: 2rem;
-    }
+        .section-description {
+            font-size: 16px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
 
-    .left {
-      background-color: #3d521f;
-      color: #e4e3df;
-    }
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
 
-    .right {
-      background-color: #e4e3df;
-      color: #3d521f;
-    }
+        .property-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
 
-    h1 {
-      font-size: 3rem;
-      letter-spacing: 3px;
-      animation: floatText 3s ease-in-out infinite;
-    }
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
 
-    h2 {
-      font-size: 2rem;
-      font-weight: 600;
-    }
+        .property-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
 
-    p {
-      margin-top: 1rem;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      max-width: 400px;
-    }
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
 
-    .contact {
-      margin-top: 2rem;
-      font-size: 0.95rem;
-    }
+        .property-card:hover .property-image img {
+            transform: scale(1.1);
+        }
 
-    .socials {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1.2rem;
-      font-size: 1.5rem;
-    }
+        .property-badges {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            gap: 8px;
+            flex-direction: column;
+            align-items: flex-start;
+        }
 
-    .socials a {
-      color: inherit;
-      transition: transform 0.3s, color 0.3s;
-    }
+        .badge {
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-    .socials a:hover {
-      transform: scale(1.2);
-      color: #728a3e;
-    }
+        .badge-sale {
+            background-color: #0066cc;
+            color: white;
+        }
 
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+        .badge-active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge-new {
+            background-color: #ff6b35;
+            color: white;
+        }
+
+        .property-content {
+            padding: 25px;
+        }
+
+        .property-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .property-title a {
+            color: #1a1a1a;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .property-title a:hover {
+            color: #0066cc;
+        }
+
+        .property-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .property-details {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 15px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .detail-label {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .property-location {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .property-location::before {
+            content: "📍";
+            font-size: 16px;
+        }
+
+        .property-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #0066cc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0052a3;
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .load-more .btn {
+            padding: 15px 40px;
+            background-color: #0066cc;
+            color: white;
+            border: 2px solid #0066cc;
+        }
+
+        .load-more .btn:hover {
+            background-color: white;
+            color: #0066cc;
+        }
+
+        @media (max-width: 768px) {
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .property-details {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="latest-properties-section">
+        <div class="section-header">
+            <p class="section-subtitle">Real Estate In Ethiopia</p>
+            <h2 class="section-title">Our Latest Properties</h2>
+            <p class="section-description">
+                Discover the latest real estate in Ethiopia on Temer Properties, featuring trusted apartments for sale in Addis Ababa — residential, commercial, and mixed-use.
+            </p>
+        </div>
+
+        <div class="properties-grid">
+            <!-- Property Card 1 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800" alt="Sarbet Blue Point Three Bedroom Apartment">
+                    <div class="property-badges">
+                        <span class="badge badge-sale">For Sale</span>
+                        <span class="badge badge-active">Active</span>
+                        <span class="badge badge-new">New Offer</span>
+                    </div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">
+                        <a href="#">Sarbet Blue Point Three Bedroom Apartment</a>
+                    </h3>
+                    <p class="property-description">
+                        This three-bedroom apartment for sale in Ethiopia offers a spacious and thoughtfully designed living environment, perfect for families or individuals seeking comfort and modern amenities.
+                    </p>
+                    <div class="property-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Beds</span>
+                            <span class="detail-value">3</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Baths</span>
+                            <span class="detail-value">2</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Size</span>
+                            <span class="detail-value">145 m²</span>
+                        </div>
+                    </div>
+                    <p class="property-location">Sarbet Blue Point, Sarbet</p>
+                    <div class="property-actions">
+                        <button class="btn btn-primary">Call Now</button>
+                        <button class="btn btn-secondary">Email</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 2 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800" alt="Aware Three Bedroom Apartment">
+                    <div class="property-badges">
+                        <span class="badge badge-sale">For Sale</span>
+                        <span class="badge badge-active">Active</span>
+                        <span class="badge badge-new">New Offer</span>
+                    </div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">
+                        <a href="#">Aware Three Bedroom Apartment</a>
+                    </h3>
+                    <p class="property-description">
+                        This three-bedroom apartment for sale in Ethiopia offers a spacious and thoughtfully designed living environment ideal for families or individuals seeking extra space and comfort.
+                    </p>
+                    <div class="property-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Beds</span>
+                            <span class="detail-value">3</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Baths</span>
+                            <span class="detail-value">2</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Size</span>
+                            <span class="detail-value">145 m²</span>
+                        </div>
+                    </div>
+                    <p class="property-location">Aware, Aware</p>
+                    <div class="property-actions">
+                        <button class="btn btn-primary">Call Now</button>
+                        <button class="btn btn-secondary">Email</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 3 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800" alt="Aware One Bedroom Apartment">
+                    <div class="property-badges">
+                        <span class="badge badge-sale">For Sale</span>
+                        <span class="badge badge-active">Active</span>
+                        <span class="badge badge-new">New Offer</span>
+                    </div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">
+                        <a href="#">Aware One Bedroom Apartment</a>
+                    </h3>
+                    <p class="property-description">
+                        This one-bedroom apartment for sale in Ethiopia offers a thoughtfully designed living space ideal for individuals or couples seeking a cozy and modern home.
+                    </p>
+                    <div class="property-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Beds</span>
+                            <span class="detail-value">1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Baths</span>
+                            <span class="detail-value">1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Size</span>
+                            <span class="detail-value">80 m²</span>
+                        </div>
+                    </div>
+                    <p class="property-location">Aware, Aware</p>
+                    <div class="property-actions">
+                        <button class="btn btn-primary">Call Now</button>
+                        <button class="btn btn-secondary">Email</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 4 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800" alt="Gelan Shopping Center">
+                    <div class="property-badges">
+                        <span class="badge badge-sale">For Sale</span>
+                        <span class="badge badge-active">Active</span>
+                        <span class="badge badge-new">New Offer</span>
+                    </div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">
+                        <a href="#">Gelan Shopping Center</a>
+                    </h3>
+                    <p class="property-description">
+                        Located in Gelan, this G+7 commercial building offers modern and functional spaces tailored for growing businesses with excellent accessibility and amenities.
+                    </p>
+                    <div class="property-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Type</span>
+                            <span class="detail-value">Commercial</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Floors</span>
+                            <span class="detail-value">G+7</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Size</span>
+                            <span class="detail-value">17 m²</span>
+                        </div>
+                    </div>
+                    <p class="property-location">Gelan Shopping Center, Gelan</p>
+                    <div class="property-actions">
+                        <button class="btn btn-primary">Call Now</button>
+                        <button class="btn btn-secondary">Email</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 5 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" alt="LYCEE Seken One Bedroom Apartment">
+                    <div class="property-badges">
+                        <span class="badge badge-sale">For Sale</span>
+                        <span class="badge badge-active">Active</span>
+                        <span class="badge badge-new">New Offer</span>
+                    </div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">
+                        <a href="#">LYCEE Seken One Bedroom Apartment</a>
+                    </h3>
+                    <p class="property-description">
+                        This one-bedroom apartment for sale in Ethiopia offers a thoughtfully designed and comfortable living space, ideal for individuals or couples seeking quality and convenience.
+                    </p>
+                    <div class="property-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Beds</span>
+                            <span class="detail-value">1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Baths</span>
+                            <span class="detail-value">1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Size</span>
+                            <span class="detail-value">86 m²</span>
+                        </div>
+                    </div>
+                    <p class="property-location">Lycee-Seken, Piyassa</p>
+                    <div class="property-actions">
+                        <button class="btn btn-primary">Call Now</button>
+                        <button class="btn btn-secondary">Email</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 6 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800" alt="LYCEE Seken Two Bedroom Apartment">
+                    <div class="property-badges">
+                        <span class="badge badge-sale">For Sale</span>
+                        <span class="badge badge-active">Active</span>
+                        <span class="badge badge-new">New Offer</span>
+                    </div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">
+                        <a href="#">LYCEE Seken Two Bedroom Apartment</a>
+                    </h3>
+                    <p class="property-description">
+                        These two-bedroom apartments for sale in Ethiopia provide a well-designed and comfortable living space, ideal for small families, couples, or individuals seeking extra room.
+                    </p>
+                    <div class="property-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Beds</span>
+                            <span class="detail-value">2</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Baths</span>
+                            <span class="detail-value">1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Size</span>
+                            <span class="detail-value">86 m²</span>
+                        </div>
+                    </div>
+                    <p class="property-location">Lycee-Seken, Piyassa</p>
+                    <div class="property-actions">
+                        <button class="btn btn-primary">Call Now</button>
+                        <button class="btn btn-secondary">Email</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="load-more">
+            <button class="btn">Load More Properties</button>
+        </div>
+    </section>
+</body>
+</html>
